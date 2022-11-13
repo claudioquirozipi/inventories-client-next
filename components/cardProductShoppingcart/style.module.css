@@ -1,0 +1,90 @@
+.card {
+  background-color: var(--white);
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 0.5rem 1rem;
+  border: var(--border);
+  background-color: rgb(255, 255, 255);
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+
+.cardDisable {
+  filter: grayscale(0.7);
+}
+
+.image {
+  height: 5rem;
+  width: 5rem;
+  object-fit: contain;
+  object-position: center;
+  grid-column: 1/2;
+  grid-row: 1/5;
+  border: var(--border);
+}
+
+.title {
+  grid-column: 2/3;
+  grid-row: 1/2;
+  padding: 0;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.title :hover {
+  color: var(--primary);
+}
+
+.price {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+.priceContainer {
+  grid-column: 2/3;
+  grid-row: 2/3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.button {
+  background-color: var(--background-primary);
+  color: white;
+  height: 1.875rem;
+  width: 7.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  outline: none;
+  border: 0;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.3125rem;
+}
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.buttonContainer {
+  grid-column: 2/3;
+  grid-row: 4/5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 1.875rem;
+  width: 7.5rem;
+  border: 1px solid red;
+  border: 1px solid rgb(228, 233, 242);
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+}
+.buttonIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

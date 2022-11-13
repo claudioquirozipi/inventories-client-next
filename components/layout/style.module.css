@@ -1,0 +1,8 @@
+.container {
+  background-color: var(--background);
+}
+
+.childrenContainer {
+  padding: 2rem var(--margin-container);
+  min-height: 70vh;
+}

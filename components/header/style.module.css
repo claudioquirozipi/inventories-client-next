@@ -1,0 +1,17 @@
+.header {
+  padding: 1rem var(--margin-container);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: var(--third);
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo {
+  height: 2rem;
+  cursor: pointer;
+}
