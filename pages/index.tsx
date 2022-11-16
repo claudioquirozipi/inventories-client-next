@@ -12,10 +12,16 @@ import ProductContainer, {
   ResponseProductContainer,
 } from "../modules/products/containers/main.container";
 import useCategories from "../modules/categories/hooks/categories.hooks";
+import useConfig from "../modules/config/hooks/config.hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState, useAppDispatch, useAppSelector } from "../modules/store";
 
 const Home: NextPage<any> = (props) => {
   // const { categories } = props;
+  const dispatch = useAppDispatch();
+  const shoppingcart = useAppSelector((state) => state.shoppingcart);
   const { categories } = useCategories();
+  const { config } = useConfig();
   console.log("data: => ", categories?.data);
 
   // const store = useContext(MyContext);
@@ -45,6 +51,8 @@ const Home: NextPage<any> = (props) => {
 
   return (
     <Layout>
+      <h1>hola: {shoppingcart.totalAmount}</h1>
+
       <ProductContainer>
         {(props: ResponseProductContainer) => (
           <>
@@ -64,14 +72,6 @@ const Home: NextPage<any> = (props) => {
       </ProductContainer>
     </Layout>
   );
-
-  function stringToArray(text: string) {
-    const newText = JSON.stringify(text)
-      .replaceAll("[", "")
-      .replaceAll("]", "")
-      .replaceAll('"', "");
-    return newText.split(",");
-  }
 };
 
 export default Home;

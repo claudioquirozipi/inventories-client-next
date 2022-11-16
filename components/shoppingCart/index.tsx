@@ -1,16 +1,17 @@
 import { useContext, useEffect, useState } from "react";
 
-// import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import CardProductShoppingcart from "../cardProductShoppingcart";
 // import { DataProduct, MyContext } from "../../utils/store";
 // import { config } from "../../utils/config";
 import style from "./style.module.css";
 import Popup from "../popup";
+import { useAppSelector } from "../../modules/store";
 
 const ShoppingCart = () => {
-  const store = {};
+  const shoppingcart = useAppSelector((state) => state.shoppingcart);
   const [visible, setVisible] = useState(false);
 
   const phoneNumber = () => "";
@@ -19,23 +20,23 @@ const ShoppingCart = () => {
     if (true) {
       setVisible(false);
     }
-  }, [store]);
+  }, [shoppingcart]);
 
   return (
     <div>
-      {true && (
+      {shoppingcart.totalAmount > 0 && (
         <div
           onClick={() => setVisible(true)}
           className={style.buttonShoppingcart}
         >
-          {/* <FontAwesomeIcon
+          <FontAwesomeIcon
             icon={faShoppingCart}
             color="var(--contrast)"
             width="20px"
             height="20px"
-          /> */}
+          />
           <span className={style.totalProductsFloat}>
-            {/* {store.state.totalProducts} */}
+            {shoppingcart.totalAmount}
           </span>
         </div>
       )}

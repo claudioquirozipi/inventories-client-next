@@ -7,9 +7,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { DataProduct, myAction, MyContext } from "../../utils/store";
 import { CardProductProps } from "./interface";
 import style from "./style.module.css";
+import { useAppDispatch, useAppSelector } from "../../modules/store";
+import { addProductToShoppingCart } from "../../modules/shoppingcart/shoppingcart.store";
 
 const CardProduct = (props: CardProductProps) => {
   const { product } = props;
+  const shoppingcart = useAppSelector((state) => state.shoppingcart);
+  const dispatch = useAppDispatch();
 
   const store: any = {};
 
@@ -43,10 +47,12 @@ const CardProduct = (props: CardProductProps) => {
               <div className={style.buttonIcon} onClick={() => {}}>
                 <FontAwesomeIcon icon={faMinus} width="20px" height="20px" />
               </div>
-              {/* {printAmount(store.state.shoppingCartProducts)} */}0
+              {shoppingcart.shoppingCart.find(
+                (sc) => sc.product.id === product.id
+              )?.amount || 0}
               <div
                 className={style.buttonIcon}
-                // onClick={() => store.dispatch(myAction.addProduct(product))}
+                onClick={() => dispatch(addProductToShoppingCart(product))}
               >
                 <FontAwesomeIcon icon={faPlus} width="20px" height="20px" />
               </div>

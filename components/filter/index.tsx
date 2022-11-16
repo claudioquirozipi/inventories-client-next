@@ -138,7 +138,7 @@ const FilterProducts = (props: FilterProductsProps) => {
 
       <div className={style.categoriesContainer}>
         {categories.map((c) => (
-          <>
+          <div key={c.id}>
             <input
               className={style.checkbox}
               type="checkbox"
@@ -155,7 +155,7 @@ const FilterProducts = (props: FilterProductsProps) => {
             >
               {c.title}
             </label>
-          </>
+          </div>
         ))}
       </div>
     </form>
