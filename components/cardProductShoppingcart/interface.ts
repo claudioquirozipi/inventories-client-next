@@ -1,5 +1,5 @@
-import { Data } from "../../utils/interface/homePage";
+import { ShoppingCart } from "../../modules/shoppingcart/shoppingcart.interface";
 
 export interface CardProductShoppingcartProps {
-  product: Data;
+  shoppingCart: ShoppingCart;
 }

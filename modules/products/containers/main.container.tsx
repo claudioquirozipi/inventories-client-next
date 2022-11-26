@@ -25,7 +25,6 @@ const ProductContainer = (props: ProductContainerProps) => {
     isLoading,
     error,
   };
-  console.log("data", response.product);
   return <>{children(response)}</>;
 };
 

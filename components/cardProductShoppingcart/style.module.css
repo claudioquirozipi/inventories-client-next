@@ -2,14 +2,11 @@
   background-color: var(--white);
   display: grid;
   grid-template-columns: 5rem 1fr;
+  grid-template-rows: auto 25px 25px;
   gap: 0.5rem 1rem;
   border: var(--border);
   background-color: rgb(255, 255, 255);
   padding: 0.5rem 1rem 0.5rem 0.5rem;
-}
-
-.cardDisable {
-  filter: grayscale(0.7);
 }
 
 .image {

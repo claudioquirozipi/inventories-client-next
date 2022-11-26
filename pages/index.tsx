@@ -22,7 +22,6 @@ const Home: NextPage<any> = (props) => {
   const shoppingcart = useAppSelector((state) => state.shoppingcart);
   const { categories } = useCategories();
   const { config } = useConfig();
-  console.log("data: => ", categories?.data);
 
   // const store = useContext(MyContext);
 
@@ -51,7 +50,9 @@ const Home: NextPage<any> = (props) => {
 
   return (
     <Layout>
-      <h1>hola: {shoppingcart.totalAmount}</h1>
+      <h1>
+        hola: {shoppingcart.totalAmount} {shoppingcart.totalPrice}
+      </h1>
 
       <ProductContainer>
         {(props: ResponseProductContainer) => (

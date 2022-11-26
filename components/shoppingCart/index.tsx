@@ -48,17 +48,22 @@ const ShoppingCart = () => {
       >
         <div className={style.container}>
           <div className={style.main}>
-            <h3 className={style.title}>Total de productos:</h3>
+            <h3 className={style.title}>
+              Total de productos: {shoppingcart.totalAmount}
+            </h3>
             <ul className={style.shoppingcartList}>
-              {/* {store.state.shoppingCartProducts?.map(
-                (sc: DataProduct, i: number) => (
-                  <CardProductShoppingcart key={i} product={sc} />
-                )
-              )} */}
+              {shoppingcart.shoppingCart.map((sc) => (
+                <CardProductShoppingcart
+                  key={sc.product.id}
+                  shoppingCart={sc}
+                />
+              ))}
             </ul>
           </div>
           <div className={style.footer}>
-            <h4 className={style.titleFooter}>Total a pagar:</h4>
+            <h4 className={style.titleFooter}>
+              Total a pagar: {shoppingcart.totalPrice}
+            </h4>
             <a
               target="_blank"
               className={style.buttonFooter}

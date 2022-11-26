@@ -8,7 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { CardProductProps } from "./interface";
 import style from "./style.module.css";
 import { useAppDispatch, useAppSelector } from "../../modules/store";
-import { addProductToShoppingCart } from "../../modules/shoppingcart/shoppingcart.store";
+import {
+  addProductToShoppingCart,
+  removeProdcutToShoppingCart,
+} from "../../modules/shoppingcart/shoppingcart.store";
 
 const CardProduct = (props: CardProductProps) => {
   const { product } = props;
@@ -44,7 +47,10 @@ const CardProduct = (props: CardProductProps) => {
         <>
           {true ? (
             <div className={style.buttonContainer}>
-              <div className={style.buttonIcon} onClick={() => {}}>
+              <div
+                className={style.buttonIcon}
+                onClick={() => dispatch(removeProdcutToShoppingCart(product))}
+              >
                 <FontAwesomeIcon icon={faMinus} width="20px" height="20px" />
               </div>
               {shoppingcart.shoppingCart.find(

@@ -1,8 +1,8 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../products/product.interface";
 
-import { ShoppingCartState } from "./shoppingcart.interface";
+import { ShoppingCart, ShoppingCartState } from "./shoppingcart.interface";
+import { Product } from "../products/product.interface";
 
 const initialState: ShoppingCartState = {
   totalAmount: 0,
@@ -18,7 +18,6 @@ export const shoppingCartSlice = createSlice({
       if (
         state.shoppingCart.find((sc) => sc.product.id === action.payload.id)
       ) {
-        console.log("if");
         state.shoppingCart = state.shoppingCart.map((sc) =>
           sc.product.id === action.payload.id
             ? {
@@ -29,7 +28,6 @@ export const shoppingCartSlice = createSlice({
             : sc
         );
       } else {
-        console.log("else");
         state.shoppingCart.push({
           amount: 1,
           price: action.payload.price,
@@ -39,14 +37,48 @@ export const shoppingCartSlice = createSlice({
       state.totalAmount += 1;
       state.totalPrice = state.totalPrice + action.payload.price;
     },
-    decrement: (state, action: PayloadAction<Product>) => {
-      state.totalAmount -= 1;
+    removeProdcutToShoppingCart: (state, action: PayloadAction<Product>) => {
+      console.log("state.shoppingCart ", state.shoppingCart);
+      console.log(
+        "=> ",
+        state.shoppingCart.find((sc) => sc.product.id === action.payload.id)
+      );
+      if (
+        state.shoppingCart.find((sc) => sc.product.id === action.payload.id)
+          ?.amount
+      ) {
+        console.log("aquí =>");
+        state.shoppingCart = state.shoppingCart.map((sc) =>
+          sc.product.id === action.payload.id
+            ? {
+                amount: sc.amount - 1,
+                price: sc.price - sc.product.price,
+                product: action.payload,
+              }
+            : sc
+        );
+        state.totalAmount -= 1;
+        state.totalPrice -= action.payload.price;
+      }
+    },
+    removeAllAmountProdcutToShoppingCart: (
+      state,
+      action: PayloadAction<ShoppingCart>
+    ) => {
+      state.totalAmount = state.totalAmount - action.payload.amount;
+      state.totalPrice = state.totalPrice - action.payload.price;
+      state.shoppingCart = state.shoppingCart.filter(
+        (sc) => sc.product.id !== action.payload.product.id
+      );
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { addProductToShoppingCart, decrement } =
-  shoppingCartSlice.actions;
+export const {
+  addProductToShoppingCart,
+  removeProdcutToShoppingCart,
+  removeAllAmountProdcutToShoppingCart,
+} = shoppingCartSlice.actions;
 
 export default shoppingCartSlice.reducer;

@@ -1,74 +1,70 @@
-import { useContext } from "react";
 import Link from "next/link";
 
+import { faMinus, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+import {
+  addProductToShoppingCart,
+  removeAllAmountProdcutToShoppingCart,
+  removeProdcutToShoppingCart,
+} from "../../modules/shoppingcart/shoppingcart.store";
 import { CardProductShoppingcartProps } from "./interface";
+import { useAppDispatch } from "../../modules/store";
 import style from "./style.module.css";
 
 const CardProductShoppingcart = (props: CardProductShoppingcartProps) => {
-  const { product } = props;
-
-  const store: any = {};
+  const { shoppingCart } = props;
+  const { product } = shoppingCart;
+  const dispatch = useAppDispatch();
 
   return (
-    <li
-      className={`${style.card} ${
-        !product.data.availability && style.cardDisable
-      }`}
-    >
+    <li className={style.card}>
       <img
         className={style.image}
-        src={
-          product.data.imagen.includes("http")
-            ? product.data.imagen
-            : `/${product.data.imagen}`
-        }
-        alt={product.data.title}
+        src={product.images[0]}
+        alt={product.title}
         width={110}
         height={110}
       />
-
       <h2 className={style.title}>
-        <Link href={`/${product.slug}`}>{product.data.title}</Link>
+        <Link href={`/${product.title}`}>{product.title}</Link>
       </h2>
       <div className={style.priceContainer}>
         <p className={style.price}>
-          Total /S{" "}
-          {/* {product.data.price * printAmount(store?.state?.shoppingCartProducts)} */}
+          Total /S {shoppingCart.amount * shoppingCart.product.price}
         </p>
-        <p className={style.price}>/S {product.data.price}</p>
+        <p className={style.price}>/S {product.price}</p>
       </div>
       <div className={style.buttonsContainer}>
         <div className={style.buttonContainer}>
-          <div className={style.buttonIcon} onClick={() => {}}>
-            {/* <FontAwesomeIcon icon={faMinus} width="20px" height="20px" /> */}
+          <div
+            className={style.buttonIcon}
+            onClick={() => dispatch(removeProdcutToShoppingCart(product))}
+          >
+            <FontAwesomeIcon icon={faMinus} width="20px" height="20px" />
           </div>
-          {printAmount(store.state.shoppingCartProducts)}
-          <div className={style.buttonIcon} onClick={() => {}}>
-            {/* <FontAwesomeIcon icon={faPlus} width="20px" height="20px" /> */}
+          {shoppingCart.amount}
+          <div
+            className={style.buttonIcon}
+            onClick={() => dispatch(addProductToShoppingCart(product))}
+          >
+            <FontAwesomeIcon icon={faPlus} width="20px" height="20px" />
           </div>
         </div>
         <div className={style.buttonIcon}>
-          {/* <FontAwesomeIcon
+          <FontAwesomeIcon
             icon={faTrash}
             width="20px"
             height="20px"
             color="var(--error)"
             onClick={() =>
-              store.dispatch(myAction.removeAllProducts(product.slug))
+              dispatch(removeAllAmountProdcutToShoppingCart(shoppingCart))
             }
-          /> */}
+          />
         </div>
       </div>
     </li>
   );
-  function printAmount(shoppingCartProducts: any[]) {
-    // const tempResponse = shoppingCartProducts.filter(
-    //   (sp: DataProduct) => sp?.slug === product.slug
-    // )[0]?.amount;
-    // let response = 0;
-    // if (tempResponse) response = tempResponse;
-    return "response";
-  }
 };
 
 export default CardProductShoppingcart;
